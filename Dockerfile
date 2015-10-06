@@ -22,7 +22,7 @@ LABEL io.k8s.description="Image for building and executing Camel routes" \
 
 # TODO: Install required packages here:
 # RUN yum install -y ... && yum clean all -y
-yum install -y --enablerepo=centosplus \
+RUN yum install -y --enablerepo=centosplus \
     tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel && \
     yum clean all -y && \
     (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
@@ -41,7 +41,7 @@ ENV PATH=/opt/maven/bin/:$PATH
 # COPY ./<builder_folder>/ /opt/app-root/
 
 # TODO: Copy the S2I scripts to /usr/local/s2i, since openshift/base-centos7 image sets io.openshift.s2i.scripts-url label that way, or update that label
-# COPY ./.s2i/bin/ /usr/local/s2i
+COPY ./.s2i/bin/ /usr/libexec/s2i
 
 # TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN chown -R 1001:1001 /opt/app-root

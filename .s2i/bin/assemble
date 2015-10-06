@@ -27,8 +27,10 @@ echo "---> Building application from source"
 # TODO: Add build steps for your application, eg npm install, bundle install
 mvn --version
 mvn clean package
+
 ERR=$?
-if [ $ERR -ne 0]; then
+
+if [ $ERR -ne 0 ]; then
 	echo "Could not build package: $ERR"
 	exit $ERR
 fi
